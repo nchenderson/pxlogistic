@@ -3,7 +3,7 @@ Type: Package
 Title: Damped Anderson Acceleration with Epsilon Monotonicity for Accelerating EM-Like Monotone Algorithms
 Version: 0.1
 Date: 2020-7-30
-Authors@R: c(person("Zhongzhe", "Ouyang", email = "oyzz@umich.edu", role = c("cre", "aut")), person("Nicholas", "Henderson", email = "nchender@umich.edu", role = c("cre", "aut"))
+Authors@R: c(person("Zhongzhe", "Ouyang", email = "oyzz@umich.edu", role = c("aut")), person("Nicholas", "Henderson", email = "nchender@umich.edu", role = c("cre", "aut")))
 Maintainer: Nicholas Henderson <nchender@umich.edu>
 Description: Implements the DAAREM method for accelerating the convergence of slow, monotone sequences from smooth, fixed-point iterations such as the EM algorithm. For further details about the DAAREM method, see Henderson, N.C. and Varadhan, R. (2019) <doi:10.1080/10618600.2019.1594835>.
 License: GPL-2
