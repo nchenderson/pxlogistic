@@ -1,6 +1,6 @@
 Package: pxlogistic
 Type: Package
-Title: Damped Anderson Acceleration with Epsilon Monotonicity for Accelerating EM-Like Monotone Algorithms
+Title: Parameter Expanded ECME for Logistic Regression
 Version: 0.1
 Date: 2020-7-30
 Authors@R: c(person("Zhongzhe", "Ouyang", email = "oyzz@umich.edu", role = c("aut")), person("Nicholas", "Henderson", email = "nchender@umich.edu", role = c("cre", "aut")))
