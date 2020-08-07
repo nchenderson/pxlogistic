@@ -1,4 +1,4 @@
-pxlogistic <- function(beta.init, X, y, n.trials=rep(1, length(y)), control=list()) {
+pxlogistic <- function(par, X, y, n.trials=rep(1, length(y)), control=list()) {
   
   control.default <- list(maxiter=2000, tol=1e-7, method="Newton")
   namc <- names(control)
@@ -11,6 +11,7 @@ pxlogistic <- function(beta.init, X, y, n.trials=rep(1, length(y)), control=list
   tol <- control$tol
   method <- control$method 
   
+  beta.init <- par
   beta.old <- beta.init
   kap <- y - n.trials/2
   iter <- 0
@@ -25,7 +26,7 @@ pxlogistic <- function(beta.init, X, y, n.trials=rep(1, length(y)), control=list
       ## maybe add the MO in another function
       x.theta <- as.numeric(X%*%theta)
       if(method=="Newton") {
-          alpha.new <- UpdateAlphaNewton(alpha.old, x.theta, y, init=!iter)
+          alpha.new <- UpdateAlphaNewton(alpha.old, x.theta, y, n.trials, init=!iter)
       } else if(method=="BFGS") {
          it <- ifelse(iter==0, 1e4, 1)
          alpha.new <- optim(alpha.old, obj, method="BFGS", control=list(maxit=it))$par
@@ -33,7 +34,7 @@ pxlogistic <- function(beta.init, X, y, n.trials=rep(1, length(y)), control=list
       beta.new <- alpha.new*theta
     
       iter <- iter + 1
-      if(norm(beta.new-beta.old, "2") < tol | iter > max.iter) break
+      if(norm(beta.new-beta.old, "2") < tol | iter > maxiter) break
       beta.old <- beta.new
       alpha.old <- alpha.new
   }
