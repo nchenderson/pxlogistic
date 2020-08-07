@@ -2,10 +2,11 @@ Package: pxlogistic
 Type: Package
 Title: Parameter Expanded ECME for Logistic Regression
 Version: 0.1
-Date: 2020-7-30
+Date: 2020-8-05
 Authors@R: c(person("Zhongzhe", "Ouyang", email = "oyzz@umich.edu", role = c("aut")), person("Nicholas", "Henderson", email = "nchender@umich.edu", role = c("cre", "aut")))
 Maintainer: Nicholas Henderson <nchender@umich.edu>
-Description: Implements the DAAREM method for accelerating the convergence of slow, monotone sequences from smooth, fixed-point iterations such as the EM algorithm. For further details about the DAAREM method, see Henderson, N.C. and Varadhan, R. (2019) <doi:10.1080/10618600.2019.1594835>.
+Imports: stats, utils
+Description: Implements a parameter expanded ECME algorithm for estimating the regression coefficients in the context of logistic regression and penalized logistic regression.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
