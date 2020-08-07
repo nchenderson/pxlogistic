@@ -7,7 +7,7 @@ Parameter-expanded ECME algorithm for logistic regression
 This is an implementation of a parameter-expanded ECME algorithm for estimating the regression coefficients in a logistic regression model.
 }
 \usage{
-pxlogistic(par, X, y, n.trials=rep(1, length(y)), control=list())
+pxlogistic(par, X, y, n.trials=rep(1, length(y)), lambda=NULL, control=list())
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,6 +22,9 @@ The vector of outcomes.
 }
 \item{n.trials}{
 The vector containing the "number of trials" for each outcome.
+}
+\item{lambda}{
+Magnitude of the L2 penalty if using penalized logistic regression.
 }
 \item{control}{
 A list of control parameters specifying any changes to default values of algorithm control parameters. Full names of control list elements must be specified, otherwise, user-specifications are ignored. See *Details*.
