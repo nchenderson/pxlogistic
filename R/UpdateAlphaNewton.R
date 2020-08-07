@@ -1,4 +1,4 @@
-UpdateAlphaNewton <- function(alpha.old, x.theta, y, init=FALSE){
+UpdateAlphaNewton <- function(alpha.old, x.theta, y, n.trials, init=FALSE) {
   if(init){
     alpha.old <- 0
     loop <- TRUE
