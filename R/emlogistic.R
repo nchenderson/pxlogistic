@@ -26,7 +26,7 @@ emlogistic <- function(par, X, y, n.trials=rep(1, length(y)), lambda=NULL, contr
     beta.new <- as.numeric(solve(crossprod(X, X*ww), crossprod(X, uvec)))
   
     iter <- iter + 1
-    if(norm(beta.new-beta.old, "2") < tol | iter > maxiter) break
+    if(norm(beta.new-beta.old, "2") < tol | iter >= maxiter) break
     beta.old <- beta.new
   }
   return(list(coef=beta.new, iter=iter))
