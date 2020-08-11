@@ -6,7 +6,7 @@ UpdateAlphaNewton <- function(alpha.old, x.theta, y, n.trials, init=FALSE) {
   else loop <- FALSE
   
   while(TRUE){
-     ept <- expit(alpha.old*x.theta)
+     ept <- plogis(alpha.old*x.theta)
      dept <- ept*(1-ept)
      f.st <- sum(x.theta*(y - n.trials*ept))
      f.nd <- sum(n.trials*x.theta*x.theta*dept)
@@ -16,8 +16,4 @@ UpdateAlphaNewton <- function(alpha.old, x.theta, y, n.trials, init=FALSE) {
   }
   ans <- alpha.new
   return(ans)
-}
-
-expit <- function(x) {
-   1/(1 + exp(-x))
 }
