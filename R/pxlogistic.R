@@ -45,7 +45,7 @@ pxlogistic <- function(par, X, y, n.trials=rep(1, length(y)), lambda=NULL, contr
       beta.new <- as.numeric(alpha.new*theta)
     
       iter <- iter + 1
-      if(norm(beta.new-beta.old, "2") < tol | iter > maxiter) break
+      if(norm(beta.new-beta.old, "2") < tol | iter >= maxiter) break
       beta.old <- beta.new
       alpha.old <- alpha.new
   }
