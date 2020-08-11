@@ -22,11 +22,15 @@ pxlogistic <- function(par, X, y, n.trials=rep(1, length(y)), lambda=NULL, contr
   PenLogLikObserved <- function(alp, x.theta, theta, lam) {
       -sum(alp*y*x.theta - n.trials*log1p(exp(alp*x.theta)) - lam*alp*alp*theta*theta/2)
   }
+  ww <- rep(0, length(y))
   while(TRUE) {
+      ## Compute weight vector
       phi <- as.numeric(X%*%beta.old)
-      ww <- as.numeric((n.trials/(2*phi))*tanh(phi/2)) ## Need to modify weight updates so no error is thrown when phi=0
+      small.phi <- abs(phi) < 1e-4
+      ww[small.phi] <- n.trials[small.phi]*(1/4 - (phi[small.phi]^2)/48 + (phi[small.phi]^4)/480)
+      ww[!small.phi] <- as.numeric((n.trials[!small.phi]/(2*phi[!small.phi]))*tanh(phi[!small.phi]/2)) 
+      
       theta <- solve(crossprod(X, X*ww), crossprod(X, uvec))/alpha.old
-      ## maybe add the MO in another function
       x.theta <- as.numeric(X%*%theta)
       if(method=="Newton") {
           alpha.new <- UpdateAlphaNewton(alpha.old, x.theta, y, n.trials, init=!iter)
@@ -36,7 +40,7 @@ pxlogistic <- function(par, X, y, n.trials=rep(1, length(y)), lambda=NULL, contr
                             control=list(maxit=it), x.theta=x.theta)$par
       }
       ## why no uniroot or optimize as an option?
-      beta.new <- alpha.new*theta
+      beta.new <- as.numeric(alpha.new*theta)
     
       iter <- iter + 1
       if(norm(beta.new-beta.old, "2") < tol | iter > maxiter) break
