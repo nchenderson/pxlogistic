@@ -30,10 +30,12 @@ pxlogistic <- function(par, X, y, n.trials=rep(1, length(y)), lambda=NULL, contr
       ww[small.phi] <- n.trials[small.phi]*(1/4 - (phi[small.phi]^2)/48 + (phi[small.phi]^4)/480)
       ww[!small.phi] <- as.numeric((n.trials[!small.phi]*tanh(phi[!small.phi]/2))/(2*phi[!small.phi])) 
       
+      #XtWX <- crossprod(X, X*ww)
       theta <- solve(crossprod(X, X*ww), crossprod(X, uvec))/alpha.old
       x.theta <- as.numeric(X%*%theta)
+      #print('hello2')
       if(method=="Newton") {
-          alpha.new <- UpdateAlphaNewton(alpha.old, x.theta, y, n.trials, init=!iter)
+          alpha.new <- UpdateAlphaNewton(alpha.old, x.theta, y, n.trials, init=TRUE)
       } else if(method=="BFGS") {
          it <- ifelse(iter==0, 1e4, 1)
          alpha.new <- optim(alpha.old, fn=LogLikObserved, method="BFGS", 
