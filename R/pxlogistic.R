@@ -28,7 +28,7 @@ pxlogistic <- function(par, X, y, n.trials=rep(1, length(y)), lambda=NULL, contr
       phi <- as.numeric(X%*%beta.old)
       small.phi <- abs(phi) < 1e-4
       ww[small.phi] <- n.trials[small.phi]*(1/4 - (phi[small.phi]^2)/48 + (phi[small.phi]^4)/480)
-      ww[!small.phi] <- as.numeric((n.trials[!small.phi]/(2*phi[!small.phi]))*tanh(phi[!small.phi]/2)) 
+      ww[!small.phi] <- as.numeric((n.trials[!small.phi]*tanh(phi[!small.phi]/2))/(2*phi[!small.phi])) 
       
       theta <- solve(crossprod(X, X*ww), crossprod(X, uvec))/alpha.old
       x.theta <- as.numeric(X%*%theta)
