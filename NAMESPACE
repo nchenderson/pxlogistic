@@ -1,3 +1,3 @@
-export(pxlogistic)
+export(pxlogistic, emlogistic)
 importFrom("stats", "optim")
 importFrom("utils", "modifyList")
