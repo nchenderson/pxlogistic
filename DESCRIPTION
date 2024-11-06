@@ -1,8 +1,8 @@
 Package: pxlogistic
 Type: Package
 Title: Parameter Expanded ECME for Logistic Regression
-Version: 0.1
-Date: 2020-8-05
+Version: 0.2
+Date: 2024-10-31
 Authors@R: c(person("Zhongzhe", "Ouyang", email = "oyzz@umich.edu", role = c("aut")), person("Nicholas", "Henderson", email = "nchender@umich.edu", role = c("cre", "aut")))
 Maintainer: Nicholas Henderson <nchender@umich.edu>
 Imports: stats, utils
