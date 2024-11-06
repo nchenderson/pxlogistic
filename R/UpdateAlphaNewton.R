@@ -7,10 +7,10 @@ UpdateRhoNewton <- function(rho.old, x.theta, y, n.trials, init=FALSE,
   while(TRUE){
     ept <- plogis(rho.old*x.theta)
     dept <- ept*(1-ept)
-    f.st <- sum(x.theta*(y - n.trials*ept))
+    f.st <- sum(svec*x.theta*(y - n.trials*ept))
     #if(abs(f.st) < 1e-12) break
     if(abs(f.st) < tol.newton) break
-    f.nd <- sum(x.theta2*n.trials*dept)
+    f.nd <- sum(svec*x.theta2*n.trials*dept)
     rho.new <- as.numeric(rho.old + f.st/f.nd)
     rho.old <- rho.new
   }
