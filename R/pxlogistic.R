@@ -18,58 +18,7 @@ pxlogistic <- function(par, X, y, n.trials=rep(1, length(y)), weights=NULL,
   if(is.null(weights)) {
       weights <- rep(1, length(y))
   }
-  #beta.init <- par
-  #beta.old <- beta.init
-  #uvec <- y - n.trials/2
-  #iter <- 0
-  #alpha.old <- 1
-  #LogLikObserved <- function(alp, x.theta) {
-  #    -sum(alp*y*x.theta - n.trials*log1p(exp(alp*x.theta)) )
-  #}
-  #PenLogLikObserved <- function(alp, x.theta, theta, lam) {
-  #    -sum(alp*y*x.theta - n.trials*log1p(exp(alp*x.theta)) - lam*alp*alp*theta*theta/2)
-  #}
-  #ww <- rep(0, length(y))
-  #phi <- as.numeric(X%*%beta.old)
-  #if(track.objective) {
-  #    objfn.track = rep(NA, maxiter + 1)
-  #    objfn.track[1] <- LogLikObserved(1, phi)
-  #}
-   
-  #for(k in 1:maxiter) {
-      ## Compute weight vector
-   #   phat <- plogis(phi) # This is expit(phi)
-  #    small.phi <- abs(phi) < 1e-4
-  #    ww[small.phi] <- n.trials[small.phi]*(1/4 - (phi[small.phi]^2)/48 + (phi[small.phi]^4)/480)
-   #   ww[!small.phi] <- as.numeric((n.trials[!small.phi]*(phat[!small.phi] - 1/2))/phi[!small.phi]) 
-      
-    #  theta <- solve(crossprod(X*sqrt(ww)), crossprod(X, uvec))/alpha.old
-    #  x.theta <- as.numeric(X%*%theta)
-    #  if(method=="Newton") {
-    #      alpha.new <- UpdateAlphaNewton(alpha.old, x.theta, y, n.trials, init=TRUE,
-    #                                     tol.newton = .01*tol)
-    #  } else if(method=="BFGS") {
-    #     it <- ifelse(iter==0, 1e4, 1)
-    #     alpha.new <- optim(alpha.old, fn=LogLikObserved, method="BFGS", 
-    #                        control=list(maxit=it), x.theta=x.theta)$par
-     # }
-      ## why no uniroot or optimize as an option?
-    #  beta.new <- as.numeric(alpha.new*theta)
-    
-    #   iter <- iter + 1
-    #  if(norm(beta.new-beta.old, "2") < tol | iter >= maxiter)  break
 
-     # beta.old <- beta.new
-    #  alpha.old <- alpha.new
-      
-    #  phi <- as.numeric(X%*%beta.old)
-    #  if(track.objective) {
-    #      objfn.track[iter+1] <- LogLikObserved(1, phi)
-    #  }
-  #}
-  #if(track.objective) {
-  #    objfn.track <- objfn.track[!is.na(objfn.track)]
-  #}
    if(is.null(lambda) & !aa.accelerate) {
        ans <- PX_ECME_Logistic(beta.init, X, y, n.trials, method, svec=weights, 
                                 tol, maxiter, track.objective, intermed)
@@ -133,7 +82,6 @@ PX_ECME_Logistic <- function(beta.init, X, y, n.trials, method, svec,
        # } else {
         #    rho.new <- uniroot(ScoreObserved, interval=c(rho.low, rho.high), x.theta=x.theta)$root
        # }
-        #rho.new <- 1
      } else if(method=="BFGS") {
          it <- ifelse(iter==0, 1e4, 1)
          rho.new <- optim(1, fn=LogLikObserved, method="BFGS", 
